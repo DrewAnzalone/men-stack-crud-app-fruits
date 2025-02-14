@@ -7,4 +7,4 @@ const fruitSchema = new mongoose.Schema({
 
 const Fruit = mongoose.model("Fruit", fruitSchema);
 
-module.exports = Fruit
+module.exports = Fruit;
