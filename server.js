@@ -27,6 +27,12 @@ app.get("/fruits", async (req, res) => {
   res.render("fruits/index.ejs", { fruits: allFruits });
 });
 
+// GET /fruits/id
+app.get("/fruits/:id", async (req, res) => {
+  const fruit = await Fruit.findById(req.params.id);
+  res.render("fruits/show.ejs", { fruit });
+});
+
 // GET /fruits/new
 app.get("/fruits/new", (req, res) => {
   res.render("fruits/new.ejs");
