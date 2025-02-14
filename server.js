@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
+const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 const print = console.log;
@@ -12,6 +13,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 
 
 mongoose.connect(URI);
@@ -50,7 +52,7 @@ app.get("/fruits/:id", async (req, res) => {
 app.post("/fruits", async (req, res) => {
   req.body.isReadyToEat = req.body.isReadyToEat === "on";
   await Fruit.create(req.body);
-  res.redirect("fruits");
+  res.redirect("/fruits");
 });
 
 // DELETE /fruits/id
